@@ -13,16 +13,16 @@ git clone https://github.com/your-username/slack-gemini-intg.git
 cd slack-gemini-intg
 
 ### 2. Create and activate a virtual environment
-
+```bash
 python3 -m venv venv
 source venv/bin/activate
 
 ### 3. Install dependencies
-
+```bash
 pip install slack_sdk google-generativeai
 
-### 3. Install dependencies
-
+### 4. Install dependencies
+```bash
 python your_script_name.py
 
 
