@@ -6,7 +6,6 @@ from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-
 # Load environment variables
 JIRA_BASE_URL = os.getenv("JIRA_BASE_URL")  # e.g. "https://yourcompany.atlassian.net"
 JIRA_EMAIL = os.getenv("JIRA_EMAIL")        # e.g. "you@example.com"
@@ -48,10 +47,24 @@ def create_jira_issue(issue_data):
         "fields": {
             "project": {"key": JIRA_PROJECT_KEY},
             "summary": issue_data["summary_subject"],
-            "description": issue_data["summary"],
+            "description": {
+                "type": "doc",
+                "version": 1,
+                "content": [
+                    {
+                        "type": "paragraph",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": issue_data["summary"]
+                            }
+                        ]
+                    }
+                ]
+            },
             "issuetype": {"name": "Task"},
             "labels": [p.lower().replace(" ", "_") for p in issue_data.get("products", [])],
-            "customfield_12345": issue_data.get("sentiment")  # Optional: Replace with actual field if needed
+            "customfield_10041": [issue_data.get("sentiment")]  # Replace with actual custom field ID
         }
     }
     response = requests.post(
