@@ -1,0 +1,58 @@
+
+--- Thread 1 ---
+{
+  "summary_subject": "Screen Broadcast pop-up appears inconsistently during App Automate sessions",
+  "summary": "A customer (GID: XXXXX) using WDIO for a POC is encountering a 'Screen Broadcast' pop-up during their App Automate sessions, occurring approximately 3 out of 10 times. Initial analysis suggests the customer's script might be triggering the pop-up by clicking a red icon, potentially due to the use of a generic identifier which explains the inconsistency. The team is requested to reproduce the issue using Appium Inspector and investigate the root cause of the intermittent behavior.",
+  "products": [
+    "App Automate"
+  ],
+  "customers": [
+    "GID: XXXX"
+  ],
+  "sentiment": "neutral"
+}
+
+--- Thread 2 ---
+{
+  "summary_subject": "PFX certificates not supported with TestNG/Cucumber on Automate",
+  "summary": "The user inquired about the support for PFX certificates when using TestNG with Cucumber for Chrome browsers on the Automate product. It was confirmed that PFX certificates are not supported on Automate for this configuration; they are only supported on App Automate.",
+  "products": [
+    "Automate",
+    "App Automate"
+  ],
+  "customers": [],
+  "sentiment": "neutral"
+}
+
+--- Thread 3 ---
+{
+  "summary_subject": "Selenium Hub unit tests failing and fixed",
+  "summary": "A unit test (UT) for Selenium Hub was failing, specifically the test related to `hostResolverHonored helper method checks should return false if the session is not of android:`. The issue has been fixed and the changes are available in pull request #11178.",
+  "products": [],
+  "customers": [],
+  "sentiment": "positive"
+}
+
+--- Thread 4 ---
+{
+  "summary_subject": "Viber app reinstall with `resignApp:false` and `otherApps` fails mid-session",
+  "summary": "Viber (GID - XXXXX) is experiencing an issue where their iOS app fails to reinstall mid-session on dedicated devices. This occurs because their app requires entitlement support, necessitating the use of `resignApp:false`, which is currently incompatible with the `otherApps` capability. The customer cannot modify their app's versioning and is unable to split test cases into separate sessions due to limited device availability, making the use of `otherApps` or `midSessionInstallApps` non-negotiable for critical test flows. The problem has persisted since March, despite multiple attempts to find a solution.",
+  "products": [
+    "App Automate"
+  ],
+  "customers": [
+    "Viber"
+  ],
+  "sentiment": "negative"
+}
+
+--- Thread 5 ---
+{
+  "summary_subject": "New certificate `production_122_02062025` blocked and added to codesigner",
+  "summary": "The discussion revolves around the management of a new certificate, `production_122_02062025`. Initially, a request was made to block this certificate on the `codesigner` system. It was clarified that this is a direct certificate addition for a new email, meaning no old certificate was involved, and no rotation was required. The certificate was successfully blocked, and subsequently, a job was run to add it to `codesigner`, which was confirmed as completed. Instructions were provided to create a ticket on the `AAP board`/`AAP dashboard` for tracking.",
+  "products": [
+    "App Automate"
+  ],
+  "customers": [],
+  "sentiment": "neutral"
+}
