@@ -6,11 +6,12 @@ import datetime
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 import google.generativeai as genai
+from http.client import IncompleteRead
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
-# Load tokens (prefer environment variables)
+# Load tokens from environment
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
@@ -29,16 +30,24 @@ def fetch_last_n_threads(channel_id, n=5):
         cursor = None
 
         while len(threads) < n:
-            response = slack_client.conversations_history(
-                channel=channel_id,
-                limit=100,
-                cursor=cursor
-            )
+            try:
+                response = slack_client.conversations_history(
+                    channel=channel_id,
+                    limit=50,  # reduce payload size
+                    cursor=cursor
+                )
+            except IncompleteRead as e:
+                logging.warning(f"IncompleteRead: Retrying conversations_history... ({e})")
+                response = slack_client.conversations_history(
+                    channel=channel_id,
+                    limit=50,
+                    cursor=cursor
+                )
+
             messages = response["messages"]
             if not messages:
                 break
 
-            # Sort messages by timestamp descending (newest first)
             messages.sort(key=lambda m: float(m["ts"]), reverse=True)
 
             for message in messages:
@@ -48,9 +57,11 @@ def fetch_last_n_threads(channel_id, n=5):
                     thread_ts = message["ts"]
                     try:
                         thread = slack_client.conversations_replies(channel=channel_id, ts=thread_ts)
-                        threads.append(thread["messages"])
+                        permalink_resp = slack_client.chat_getPermalink(channel=channel_id, message_ts=thread_ts)
+                        permalink = permalink_resp.get("permalink", "")
+                        threads.append({"messages": thread["messages"], "permalink": permalink})
                     except SlackApiError as e:
-                        logging.error(f"Error fetching thread replies: {e.response['error']}")
+                        logging.error(f"Error fetching thread or permalink: {e.response['error']}")
                     time.sleep(1)  # avoid rate limits
 
             cursor = response.get("response_metadata", {}).get("next_cursor")
@@ -63,7 +74,7 @@ def fetch_last_n_threads(channel_id, n=5):
         logging.error(f"Slack API error: {e.response['error']}")
         return []
 
-def analyze_thread_for_issues(thread_messages):
+def analyze_thread_for_issues(thread_messages, permalink):
     combined_text = "\n".join([msg.get("text", "") for msg in thread_messages])
 
     allowed_products = [
@@ -106,6 +117,7 @@ If no relevant information is found, return empty values like this:
 Slack thread content:
 {combined_text}
 """
+
     try:
         response = gemini_model.generate_content(prompt)
         raw_output = getattr(response, "text", str(response)).strip()
@@ -118,6 +130,13 @@ Slack thread content:
 
         try:
             result_json = json.loads(raw_output)
+
+            # Append permalink to summary
+            if result_json.get("summary"):
+                result_json["summary"] += f"\n\n🔗 Slack thread: {permalink}"
+            else:
+                result_json["summary"] = f"🔗 Slack thread: {permalink}"
+
             return json.dumps(result_json, indent=2)
         except json.JSONDecodeError:
             logging.warning("Gemini response could not be parsed as JSON.")
@@ -127,9 +146,8 @@ Slack thread content:
         logging.error(f"Gemini error: {e}")
         return f"Gemini error: {e}"
 
-
 def main():
-    channel_id = os.getenv("SLACK_CHANNEL_ID")  
+    channel_id = os.getenv("SLACK_CHANNEL_ID", "")
     logging.info(f"Fetching last 5 threads from channel: {channel_id}")
     threads = fetch_last_n_threads(channel_id, n=5)
 
@@ -141,9 +159,9 @@ def main():
     filename = f"output_{timestamp}.txt"
 
     with open(filename, "w", encoding="utf-8") as f:
-        for i, thread in enumerate(threads):
+        for i, thread_data in enumerate(threads):
             f.write(f"\n--- Thread {i + 1} ---\n")
-            result = analyze_thread_for_issues(thread)
+            result = analyze_thread_for_issues(thread_data["messages"], thread_data["permalink"])
             f.write(result + "\n")
 
     logging.info(f"Analysis complete. Results saved to '{filename}'.")
