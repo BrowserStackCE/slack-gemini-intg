@@ -6,12 +6,13 @@ from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
 # Load environment variables
-JIRA_BASE_URL = os.getenv("JIRA_BASE_URL")  # e.g. "https://yourcompany.atlassian.net"
-JIRA_EMAIL = os.getenv("JIRA_EMAIL")        # e.g. "you@example.com"
-JIRA_API_TOKEN = os.getenv("JIRA_API_TOKEN")
-JIRA_PROJECT_KEY = os.getenv("JIRA_PROJECT_KEY")  # e.g. "ENG"
-OUTPUT_FILENAME = os.getenv("JIRA_OUTPUT_FILE")    # e.g. "output_20250605_193012.txt"
+JIRA_BASE_URL = ""
+JIRA_EMAIL = ""
+JIRA_API_TOKEN= ""
+JIRA_PROJECT_KEY = ""
+OUTPUT_FILENAME = ""
 
 if not all([JIRA_BASE_URL, JIRA_EMAIL, JIRA_API_TOKEN, JIRA_PROJECT_KEY, OUTPUT_FILENAME]):
     logging.error("One or more required environment variables are missing.")
@@ -62,9 +63,10 @@ def create_jira_issue(issue_data):
                     }
                 ]
             },
-            "issuetype": {"name": "Task"},
+            "issuetype": {"name": "Ticket"},
             "labels": [p.lower().replace(" ", "_") for p in issue_data.get("products", [])],
-            "customfield_10041": [issue_data.get("sentiment")]  # Replace with actual custom field ID
+            "customfield_10104": "10155",  # Source
+            "customfield_10103": "10698"  # Work Category Internal
         }
     }
     response = requests.post(
