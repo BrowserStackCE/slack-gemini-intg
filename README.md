@@ -17,9 +17,10 @@ source venv/bin/activate
 
 # Install dependencies
 pip install slack_sdk google-generativeai
+pip install python-dotenv
 
-# Run the Python script
-python your_script_name.py
+# Run the Python script for Running the Thread Analysis and Create Jira Ticket
+python pipeline_runner.py
 
 
 

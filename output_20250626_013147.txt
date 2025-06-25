@@ -1,0 +1,105 @@
+
+--- Thread 1 ---
+{
+  "summary_subject": "Web A11Y Scanner Not Ready Error in Automate",
+  "summary": "A user is encountering an urgent error 'Scanner is not ready on the page after multiple retries' while running accessibility automation on BrowserStack Automate. The issue persists across different builds and after commenting out the `browserstack.performance` capability. The user is running code from GitHub and has provided links to affected Automate sessions and a Jira ticket (A11Y-6454).",
+  "products": [
+    "Automate",
+    "Web A11Y"
+  ],
+  "customers": [],
+  "sentiment": "negative"
+}
+
+--- Thread 2 ---
+{
+  "summary_subject": "A11Y Client Queries: Page Counting, Report Failures, Playwright Contexts",
+  "summary": "An unnamed client has raised several technical questions regarding the Accessibility testing feature. They require detailed clarification on how pages are counted for billing purposes, including definitions for 'new page' (e.g., URL variations, repeated access) and whether counting rules are consistent across Automate and Website Scanner features. The client also reported intermittent failures in generating reports for their accessibility test builds and is seeking a root cause. Finally, they inquired about the compatibility of their Playwright-based test architecture, which uses contexts for specific panels, with the Accessibility testing functionality.",
+  "products": [
+    "Accessibility",
+    "Automate",
+    "Web A11Y"
+  ],
+  "customers": [
+    "Anonymous"
+  ],
+  "sentiment": "neutral"
+}
+
+--- Thread 3 ---
+{
+  "summary_subject": "Medallia Automated Accessibility Builds Stuck",
+  "summary": "Medallia reported multiple automated accessibility builds stuck in a running state, some for over a week and others for two weeks. Investigation by the team revealed that no test cases or stop requests were received for these builds, which subsequently timed out at Testhub. The team manually stopped and completed the identified builds. A follow-up inquiry was made regarding the root cause of the issue, specifically whether it was client-side or an internal system problem.",
+  "products": [
+    "Accessibility"
+  ],
+  "customers": [
+    "Medallia"
+  ],
+  "sentiment": "neutral"
+}
+
+--- Thread 4 ---
+{
+  "summary_subject": "Sitemap generation issue for RocketSoftware",
+  "summary": "Customer RocketSoftware (GID: 57435) is experiencing issues generating a sitemap for the URL `https://www.rocketsoftware.com/`. The issue has been escalated to the #C082BLE2S66 channel and a Jira ticket A11Y-6451 has been created.",
+  "products": [
+    "Accessibility",
+    "Web A11Y"
+  ],
+  "customers": [
+    "RocketSoftware"
+  ],
+  "sentiment": "negative"
+}
+
+--- Thread 5 ---
+{
+  "summary_subject": "EPub File Scanning Capability",
+  "summary": "A user is inquiring if EPub files can be scanned using the existing PDF scanner functionality. They are also asking if EPub scanning is on the roadmap if it's not currently supported. A Jira ticket A11Y-6449 is referenced, suggesting this is related to accessibility scanning.",
+  "products": [
+    "Ally"
+  ],
+  "customers": [],
+  "sentiment": "neutral"
+}
+
+--- Thread 6 ---
+{
+  "summary_subject": "A11Y Reporting Integration with TM and TRA",
+  "summary": "Customers are frequently asking about the integration of Accessibility (A11Y) reporting into Test Management (TM) and Test Observability (TRA). The team is aware of ongoing work for Automate & A11Y integration, but clarification is needed on whether A11Y reporting for TM and TRA is on the roadmap. Related Jira ticket A11Y-6439 is linked.",
+  "products": [
+    "Accessibility",
+    "Test Management",
+    "Test Observability",
+    "Automate"
+  ],
+  "customers": [],
+  "sentiment": "neutral"
+}
+
+--- Thread 7 ---
+{
+  "summary_subject": "Dev Environment Issues: A11Y Redirection to Central Scanner & 502 Errors",
+  "summary": "Users are blocked from testing a dashboard flow on the dev environment due to frequent 502 errors on the `devaccessibility` platform and a redirection issue from the Accessibility landing page to Central Scanner. This redirection is part of a new onboarding flow, and it's suspected that Central Scanner is not properly set up on the `dev_staging` environment. Additionally, Redis data is not persisting after 502 errors. A potential workaround suggested is to shift testing to the staging environment. Technical steps involving Redis and database seeding were also provided.",
+  "products": [
+    "Accessibility",
+    "Central Scanner"
+  ],
+  "customers": [],
+  "sentiment": "negative"
+}
+
+--- Thread 8 ---
+{
+  "summary_subject": "Accessibility Reports Not Displaying for NUnit CLI Builds",
+  "summary": "A user is unable to view generated accessibility (A11Y) reports for NUnit CLI builds on accessibility.browserstack.com, specifically for project 'Rahul'. Despite sending correct `thTestRunUuid`, `testHubUuid`, and JWT tokens, and reports being saved according to Automate session logs with completed tests and issues, the A11Y reports are not visible. The user has provided specific Automate session links for investigation.",
+  "products": [
+    "Accessibility",
+    "Automate"
+  ],
+  "customers": [
+    "Rahul"
+  ],
+  "sentiment": "negative"
+}
