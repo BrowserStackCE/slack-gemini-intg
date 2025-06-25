@@ -65,8 +65,8 @@ def create_jira_issue(issue_data):
             },
             "issuetype": {"name": "Ticket"},
             "labels": [p.lower().replace(" ", "_") for p in issue_data.get("products", [])],
-            "customfield_10104": "10155",  # Source
-            "customfield_10103": "10698"  # Work Category Internal
+            "customfield_10104": { "id": "10155" }, #source
+            "customfield_10103": { "id": "10697" }  # Work category internal
         }
     }
     response = requests.post(
