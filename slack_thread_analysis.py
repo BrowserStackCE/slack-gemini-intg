@@ -6,9 +6,10 @@ from slack_sdk.errors import SlackApiError
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 load_dotenv(override=True)
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -42,13 +43,12 @@ def fetch_last_n_threads(channel_id):
         threads = []
         cursor = None
 
-        # Timestamps
         current_ts = get_current_utc_timestamp()
         previous_ts = read_last_timestamp()
 
         if not previous_ts:
             logging.info("No previous timestamp found, using current time minus 1 hour as fallback.")
-            previous_ts = str(float(current_ts) - 3600)  # default to 1 hour ago
+            previous_ts = str(float(current_ts) - 3600)
 
         logging.info(f"Fetching all threads between {previous_ts} and {current_ts}")
 
@@ -72,25 +72,25 @@ def fetch_last_n_threads(channel_id):
                     thread_ts = message["ts"]
                     try:
                         thread = slack_client.conversations_replies(channel=channel_id, ts=thread_ts)
-                        threads.append(thread["messages"])
+                        permalink_resp = slack_client.chat_getPermalink(channel=channel_id, message_ts=thread_ts)
+                        permalink = permalink_resp.get("permalink", "")
+                        threads.append({"messages": thread["messages"], "permalink": permalink})
                     except SlackApiError as e:
-                        logging.error(f"Error fetching thread replies: {e.response['error']}")
-                    time.sleep(1)  # to avoid hitting Slack rate limits
+                        logging.error(f"Error fetching thread or permalink: {e.response['error']}")
+                    time.sleep(1)
 
             cursor = response.get("response_metadata", {}).get("next_cursor")
             if not cursor:
                 break
 
-        # Save the current timestamp for the next run
         write_current_timestamp(current_ts)
-
         return threads
 
     except SlackApiError as e:
         logging.error(f"Slack API error: {e.response['error']}")
         return []
 
-def analyze_thread_for_issues(thread_messages):
+def analyze_thread_for_issues(thread_messages, permalink):
     combined_text = "\n".join([msg.get("text", "") for msg in thread_messages])
     allowed_products = [
         "Ally", "Accessibility", "App Automate", "App Percy", "App Live", "Automate", "Automate TurboScale",
@@ -134,6 +134,13 @@ Thread:
 
         try:
             result_json = json.loads(raw_output)
+
+            # Add Slack thread permalink to summary
+            if result_json.get("summary"):
+                result_json["summary"] += f"\n\n🔗 Slack thread: {permalink}"
+            else:
+                result_json["summary"] = f"🔗 Slack thread: {permalink}"
+
             return json.dumps(result_json, indent=2)
         except json.JSONDecodeError:
             logging.warning("Gemini response could not be parsed as JSON.")
@@ -154,9 +161,9 @@ def analyze_and_save_threads(channel_id):
     filename = f"output_{timestamp}.txt"
 
     with open(filename, "w", encoding="utf-8") as f:
-        for i, thread in enumerate(threads):
+        for i, thread_data in enumerate(threads):
             f.write(f"\n--- Thread {i + 1} ---\n")
-            result = analyze_thread_for_issues(thread)
+            result = analyze_thread_for_issues(thread_data["messages"], thread_data["permalink"])
             f.write(result + "\n")
 
     logging.info(f"Analysis complete. Results saved to '{filename}'.")
