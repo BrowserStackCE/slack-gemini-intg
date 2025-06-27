@@ -1,0 +1,48 @@
+
+--- Thread 1 ---
+{
+  "summary_subject": "Flaky RSpec Failures Assigned to PCP",
+  "summary": "RSpec tests currently assigned to the PCP team are failing and are suspected to be flaky tests that are misassigned. A request has been made for the responsible team to investigate and fix these failures.\n\n\ud83d\udd17 Slack thread: https://browserstack.slack.com/archives/CPDTKNQ4A/p1751008503180509?thread_ts=1751008503.180509&cid=CPDTKNQ4A",
+  "products": [
+    "Test Observability"
+  ],
+  "customers": [],
+  "sentiment": "neutral"
+}
+
+--- Thread 2 ---
+{
+  "summary_subject": "Log investigation for App Automate and Kafka EDS",
+  "summary": "A user from a subteam is requesting assistance to check Selenium logs on preprod for an App Automate session, as well as Kafka EDS pipeline logs. They are seeking help from the Squad QA team and specific individuals to sync and resolve this.\n\n\ud83d\udd17 Slack thread: https://browserstack.slack.com/archives/CPDTKNQ4A/p1751003966549639?thread_ts=1751003966.549639&cid=CPDTKNQ4A",
+  "products": [
+    "App Automate"
+  ],
+  "customers": [],
+  "sentiment": "neutral"
+}
+
+--- Thread 3 ---
+{
+  "summary_subject": "S3 bucket region optimization for app uploads",
+  "summary": "PRs `browserstack/app-uploader/pull/2252` and `browserstack/railsApp/pull/136184` introduce logic to upload files to the nearest S3 bucket region by default for all `app-uploader` and `codesigner` uploads. This is expected to reduce upload times in APS and APSE regions and lower inter-region network costs.\n\n\ud83d\udd17 Slack thread: https://browserstack.slack.com/archives/CPDTKNQ4A/p1751003409027829?thread_ts=1751003409.027829&cid=CPDTKNQ4A",
+  "products": [
+    "App Automate",
+    "App Live",
+    "App Percy"
+  ],
+  "customers": [],
+  "sentiment": "positive"
+}
+
+--- Thread 4 ---
+{
+  "summary_subject": "App Automate GRR: Incorrect App Pricing Despite US IP Assignment",
+  "summary": "A customer with US region GRR (Geo-Restricted Routing) enabled on App Automate is encountering unexpected pricing details within their app in some sessions. The customer believes this is due to devices not being assigned from the US region, which violates their app's restrictions. However, the terminal IP for a reported 'failed' session (209.10.139.190) was verified as US-assigned, and GRR is confirmed enabled on the account. The issue persists even when BrowserStack allocates a US IP, suggesting a potential problem within the customer's application. Further debugging steps are requested to diagnose the root cause.\n\n\ud83d\udd17 Slack thread: https://browserstack.slack.com/archives/CPDTKNQ4A/p1750973208917109?thread_ts=1750973208.917109&cid=CPDTKNQ4A",
+  "products": [
+    "App Automate"
+  ],
+  "customers": [
+    "GID- 9074881"
+  ],
+  "sentiment": "negative"
+}

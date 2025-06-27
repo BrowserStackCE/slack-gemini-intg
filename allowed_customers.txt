@@ -1,0 +1,116 @@
+Group ID:
+
+GID: 5237353  
+GID: 5226591  
+GID: 2502287  
+GID: 3028094  
+GID: 8455417  
+GID: 6024264  
+GID: 9470840  
+GID: 7050384  
+GID: 4560456  
+GID: 3810472  
+GID: 4116164  
+GID: 8763889  
+GID: 5190083  
+GID: 6229318  
+GID: 6480647  
+GID: 2427502  
+GID: 644867  
+GID: 861393  
+GID: 2768570  
+GID: 6170657  
+GID: 2871000  
+GID: 2624984  
+GID: 5257772  
+GID: 6120075  
+GID: 8294049  
+GID: 3964736  
+GID: 3868294  
+GID: 4397595  
+GID: 9458838  
+GID: 2342234  
+GID: 1802689  
+GID: 2831552  
+GID: 4458818  
+GID: 4306924  
+GID: 1860423  
+GID: 2460199  
+GID: 6356400  
+GID: 3814098  
+GID: 8514670  
+GID: 5329342  
+GID: 9570030  
+GID: 8278179  
+GID: 3715225  
+GID: 3308981  
+GID: 7576619  
+GID: 4520866  
+GID: 6074437  
+GID: 3683789  
+GID: 4025526  
+GID: 4044719  
+GID: 4990976
+
+Customer name:
+
+Barclays
+Aviva
+Danske Bank
+UBS
+HSBC
+PWC
+TD Bank
+United Airlines
+Bank of America
+US Bank
+Wells Fargo
+Amazon
+Microsoft
+Paypal
+GM
+Walmart
+JP Morgan Chase
+Adobe
+Charles Schwab
+RS components
+NEXT
+Virgin Money
+Interactive Investor
+Centrica
+Fanduel
+Optus
+SBI - Group
+IDFC
+Airtel
+King
+Riverty
+Proximus Group
+VGZ
+Ancestry 
+GreenDot 
+Coinbase 
+VFC 
+PG&E 
+Seismic 
+Aera Technology
+Tapestry
+Victoria Secret
+Savvas Learning
+Bose Corporation
+Corewell Health
+Revvity
+Guardian Life
+Govt of Illinois
+Capitec Bank
+ODP
+Ecolab
+Medtronic
+Novo Nordisk
+Canva
+Sapiens
+Addepar
+Cloudflare
+SCIF
+Scopely
+Tn.gov
